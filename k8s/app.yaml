@@ -16,15 +16,7 @@ spec:
     spec:
       containers:
       - name: gateway
-        image: leonardosartorello/java-gateway-k8s:v3
-        ports:
-        - containerPort: 80
-        env:
-        - name: SERVER_HOST
-          valueFrom:
-            configMapKeyRef:
-              name: dados
-              key: SERVER_HOST
+        image: leonardosartorello/java-gateway-k8s:v1
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -44,15 +36,8 @@ spec:
     spec:
       containers:
       - name: pagamentos
-        image: leonardosartorello/java-pagamentos-k8s:v3
-        ports:
-        - containerPort: 4000
+        image: leonardosartorello/java-pagamentos-k8s:v1
         env:
-        - name: SERVER_HOST
-          valueFrom:
-            configMapKeyRef:
-              name: dados
-              key: SERVER_HOST
         - name: DB_HOST
           valueFrom:
             configMapKeyRef:
@@ -87,15 +72,8 @@ spec:
     spec:
       containers:
       - name: pedidos
-        image: leonardosartorello/java-pedidos-k8s:v3
-        ports:
-        - containerPort: 40001
+        image: leonardosartorello/java-pedidos-k8s:v1
         env:
-        - name: SERVER_HOST
-          valueFrom:
-            configMapKeyRef:
-              name: dados
-              key: SERVER_HOST
         - name: DB_HOST
           valueFrom:
             configMapKeyRef:
@@ -130,12 +108,4 @@ spec:
     spec:
       containers:
       - name: server
-        image: leonardosartorello/java-server-k8s:v3
-        ports:
-        - containerPort: 8081
-        env:
-        - name: SERVER_HOST
-          valueFrom:
-            configMapKeyRef:
-              name: dados
-              key: SERVER_HOST
+        image: leonardosartorello/java-server-k8s:v2
